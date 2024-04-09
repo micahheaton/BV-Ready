@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <header class="container mx-auto py-6 mb-8">   
+        <img src="https://res.cloudinary.com/brandpad/image/upload/c_scale,dpr_auto,f_auto,w_768/v1681240120/15526/bluevoyant_lock-up_emailsignature" alt="BlueVoyant Logo" class="h-12"> 
+        <h1 class="text-3xl font-bold text-blue-600">Copilot for Security Readiness Assessment</h1>
+    </header>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copilot for Security Readiness Assessment</title>
+    <h2>Congratulations!  You're a great candidate for Copilot for Security.  But there is some work to do and we can help you</h2>
+    <h3>Microsoft Security Product Deployment Status</h3>
+    <p>The following bar graph illustrates the deployment status of Microsoft security products based on the points achieved in the Secure Score:</p>
+  
+    <canvas id="productDeploymentChart"></canvas>
+  
+    <h3>Copilot for Security Use Case Consideration</h3>
+    <ul>
+        <li>SecOps and SOC analysts can leverage Copilot for Security to expedite incident investigation and response by utilizing AI-powered insights and recommendations.</li>
+        <li>ITOps and End User Compute teams can benefit from Copilot for Security's proactive threat detection capabilities to identify and mitigate potential risks before they impact end-users.</li>
+        <li>CISOs can use Copilot for Security to gain a holistic view of the organization's security posture and make informed decisions on resource allocation and risk management strategies.</li>
+    </ul>
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-top: 30px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+       <h2>What is Copilot for Security?</h2>
+    <p>Copilot for Security is an AI-powered analysis and investigation tool from Microsoft that integrates with their security products to enhance threat detection, response, and overall security posture. It empowers various security stakeholders, including SecOps, ITOps, and CISOs, to make data-driven decisions and streamline security operations.</p>
+    
+    <h2>Your Journey to Copilot for Security Activation and Maturity</h2>
+    <p>To maximize the benefits of Copilot for Security, it is crucial to have the prerequisite Microsoft security tools properly deployed and configured. This report will assess your organization's readiness for Copilot for Security based on the deployment status of these tools, as reflected in your Microsoft Secure Score.</p>
+    
+    <h1 class="text-3xl font-bold text-bv-blue">M365 Threat Gap Analysis Report</h1>
+
+    <h2>Introduction</h2>
+    <p>This report provides a comprehensive analysis of the organization's M365 security posture, identifying vulnerabilities, and recommending actions for improvement.</p>
+    <section class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-600">Microsoft Secure Score - Security Improvement Report</h2>
+      
+        <div class="flex flex-wrap mb-4">
+          <div class="w-1/2 px-4">
+            <h3 class="text-lg font-medium mb-2">Executive Summary</h3>
+            <canvas id="secureScorePieChart"></canvas>
+            <script>
+                var secureScoreData = {
+                    completed: {{ secure_score.secure_score_completed }},
+                    toAddress: {{ secure_score.secure_score_to_address }}
+                };
+            
+                var ctx = document.getElementById('secureScorePieChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Completed', 'To Address'],
+                        datasets: [{
+                            data: [secureScoreData.completed, secureScoreData.toAddress],
+                            backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)']
+                        }]
+                    }
+                });
+            </script>
+            <p>Current Secure Score: {{ secure_score.secure_score_completed }}% completed, {{ secure_score.secure_score_to_address }}% to address</p>
+            <p>Active Devices: {{ device_risk.active_devices_count }}</p>
+            <p>Inactive Devices: {{ device_risk.inactive_devices_count }}</p>
+          </div>
+        </div>
+      
+        <h3>Analysis Overview</h3>
+
+
+    </section>
+    <p>The Microsoft Secure Score represents the overall security posture of the organization. Addressing recommendations can enhance security defenses.</p>
+
+    <h3>Recommendation Status Breakdown</h3>
+        {% for _, row in secure_score.category_scores.iterrows() %}
+        <h4>{{ row['Category'] }}:</h4>
+        <canvas id="categoryPieChart{{ loop.index }}"></canvas>
+        <script>
+            var categoryData{{ loop.index }} = {
+                completed: {{ row['Completed Percentage'] | round(1) }},
+                toAddress: {{ row['To Address Percentage'] | round(1) }}
+            };
+    
+            var ctx{{ loop.index }} = document.getElementById('categoryPieChart{{ loop.index }}').getContext('2d');
+            new Chart(ctx{{ loop.index }}, {
+                type: 'pie',
+                data: {
+                    labels: ['Completed', 'To Address'],
+                    datasets: [{
+                        data: [categoryData{{ loop.index }}.completed, categoryData{{ loop.index }}.toAddress],
+                        backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(255, 99, 132, 0.6)']
+                    }]
+                }
+            });
+        </script>
+        <ul>
+            <li>Completed: {{ row['Completed Percentage'] | round(1) }}%</li>
+            <li>To Address: {{ row['To Address Percentage'] | round(1) }}%</li>
+        </ul>
+    {% endfor %}
+
+    <h3>Key Insights</h3>
+    <ul>
+        <li>Prioritize implementing the following high-impact actions:
+            <table>
+                <thead>
+                    <tr>
+                        <th>Action Name</th>
+                        <th>Points Possible</th>
+                        <th>Points Achieved</th>
+                        <th>Score Difference</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for action in secure_score.top_actions_to_prioritize %}
+                        <tr>
+                            <td>{{ action[0] }}</td>
+                            <td>{{ action[1] }}</td>
+                            <td>{{ action[2] }}</td>
+                            <td>{{ action[3] }}</td>
+                            <td>{{ action[4] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </li>
+    </ul>
+    
+    <h3>Recommendations</h3>
+    <ul>
+        <li>Regularly review and prioritize the implementation of recommended actions based on their potential impact and relevance to your organization's security posture.</li>
+        <li>Assign ownership and establish timelines for addressing the identified actions, focusing on the top categories and high-impact actions.</li>
+        <li>Conduct periodic assessments to track progress and ensure continuous improvement in your Microsoft Secure Score.</li>
+        <li>Leverage the Microsoft Secure Score dashboard to gain insights into your security posture and benchmark your progress against industry peers.</li>
+        <li>Engage with relevant stakeholders and decision-makers to allocate resources and prioritize the implementation of security recommendations.</li>
+    </ul>
+
+    <h2>Threat and Vulnerability Management (TVM) in Microsoft Defender for Endpoint</h2>
+    <h3>Introduction</h3>
+    <p>TVM plays a crucial role in proactive threat identification and risk mitigation within the broader Microsoft security framework.</p>
+
+    <h3>Detailed Analysis</h3>
+    <canvas id="tvmBarGraph"></canvas>
+
+    <script>
+        var tvmData = {
+            totalRecommendations: {{ tvm.total_recommendations }},
+            activeRecommendations: {{ tvm.active_recommendations }}
+        };
+    
+        var ctx = document.getElementById('tvmBarGraph').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Total Recommendations', 'Active Recommendations'],
+                datasets: [{
+                    data: [tvmData.totalRecommendations, tvmData.activeRecommendations],
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <p>Exposure Analysis:</p>
+    <canvas id="exposureScoreChart"></canvas>
+    
+    <script>
+        var exposureScore = {{ tvm.exposure_score_avg }};
+    
+        var ctx = document.getElementById('exposureScoreChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                datasets: [{
+                    label: 'Exposure Score',
+                    data: [0, 0, 0, 0, 0, 0, exposureScore, 0, 0, 0, 0],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'rgba(75, 192, 192, 1)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 10
+                    }
+                }
+            }
+        });
+    </script>
+    <p>Total Recommendations: {{ tvm.total_recommendations }}</p>
+    <p>Active Recommendations: {{ tvm.active_recommendations }}</p>
+    <p>Exposure Analysis: Average Exposure Score - {{ tvm.exposure_score_avg }}</p>
+
+    <h4>Top 10 Security Recommendations with Impacted Devices:</h4>
+    <table class="bg-white border border-gray-200 shadow-md rounded-md"> 
+    <thead class="bg-calcite text-gray-800">
+            <tr>
+                <th class="px-4 py-2">Security Recommendation</th>
+                <th class="px-4 py-2">Exposure Score Impact</th>
+                <th class="px-4 py-2">Exposed Machines</th>
+                <th class="px-4 py-2">Total Machines</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recommendation in tvm.top_recommendations.itertuples(index=False) %}
+                <tr>
+                    <td>{{ recommendation[0] }}</td>
+                    <td>{{ recommendation[1] }}</td>
+                    <td>{{ recommendation[2] }}</td>
+                    <td>{{ recommendation[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Actionable Steps</h3>
+    <ul>
+        <li>Prioritize the remediation of vulnerabilities based on their exposure score impact and the criticality of the affected assets.</li>
+        <li>Establish a regular patch management process to ensure timely deployment of security updates across your environment.</li>
+        <li>If you have existing third-party patching or vulnerability management software, ensure it is properly configured and covers all your critical assets.</li>
+        <li>If you don't have a dedicated solution for vulnerability management, consider adopting a comprehensive vulnerability management service like <a href="https://www.bluevoyant.com/services/visibl-vulnerability-identification-services" target="_blank">BlueVoyant's Visibl Vulnerability Identification Services</a>.</li>
+        <li>If you have limited internal resources to manage software vulnerabilities, partnering with a trusted security provider can help you streamline your vulnerability management efforts.</li>
+    </ul>
+    
+    <p>To learn more about BlueVoyant's vulnerability management service and how it can benefit your organization, click the button below to send a Microsoft Teams message to our team:</p>
+    <a href="mailto:microsoft@bluevoyant.com?subject=Inquiry%20about%20Vulnerability%20Management%20Service&body=Hello%2C%0A%0AI%20would%20like%20to%20learn%20more%20about%20BlueVoyant%27s%20vulnerability%20management%20service.%20Please%20let%20me%20know%20how%20we%20can%20schedule%20a%20discussion.%0A%0AThank%20you%2C%0A%5BYour%20Name%5D" target="_blank"><button>Contact BlueVoyant</button></a>
+    
+    {% if device_risk.active_devices_count > 500 %}
+    <p>As your organization has more than 500 devices, we highly recommend scheduling a demonstration of our vulnerability management service. Click the button below to book a convenient time slot:</p>
+    <a href="https://calendly.com/bluevoyant/vulnerability-management-demo" target="_blank"><button>Schedule a Demo</button></a>
+{% endif %}
+
+<h2>User Detections in Microsoft Security Technology</h2>
+<h3>Introduction</h3>
+<p>User detection highlights human-related risks in the organization.</p>
+
+<h3>Detailed Analysis</h3>
+<h4>Important Detection Types:</h4>
+{% if user_risk.important_detections.empty %}
+    <p>No important detection types found.</p>
+{% else %}
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Detection Type</th>
+                <th>Documentation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for _, row in user_risk.important_detections.iterrows() %}
+                <tr>
+                    <td>{{ row['User'] }}</td>
+                    <td>{{ row['Detection type'] }}</td>
+                    <td><a href="{{ row['Documentation URL'] }}" target="_blank">Learn More</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+<h4>Top 10 Highest Risk Users:</h4>
+{% if user_risk.top_users_with_prominent_detection.empty %}
+    <p>No high-risk users with "At risk" state found.</p>
+{% else %}
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>UPN</th>
+                <th>Incident Count</th>
+                <th>Risk Level</th>
+                <th>Most Prominent Detection</th>
+                <th>Detection Type Details</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for _, row in user_risk.top_users_with_prominent_detection.iterrows() %}
+                <tr>
+                    <td>{{ row['User'] }}</td>
+                    <td>{{ row['UPN'] }}</td>
+                    <td>{{ row['Incident Count'] }}</td>
+                    <td>{{ row['Risk level'] }}</td>
+                    <td>{{ row['Most Prominent Detection'] }}</td>
+                    <td><a href="{{ row['Detection Type URL'] }}" target="_blank">Learn More</a></td>
+                    <td>{{ row['Location'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+    <h3>Actionable Insights</h3>
+    <ul>
+        <li>Investigate high-risk user detections promptly to determine the root cause and potential impact of the detected activities.</li>
+        <li>Implement risk-based authentication and conditional access policies to enforce stricter security controls for high-risk users and scenarios.</li>
+        <li>Conduct targeted user education and awareness campaigns to help users recognize and report suspicious activities, such as phishing attempts or unauthorized access.</li>
+        <li>Regularly review and update user access permissions to ensure the principle of least privilege is applied and users have access only to the resources they need.</li>
+        <li>Implement multi-factor authentication (MFA) for all user accounts to add an extra layer of security and mitigate the risk of compromised credentials.</li>
+        <li>Establish a process for timely offboarding of user accounts when employees leave the organization to prevent unauthorized access.</li>
+        <li>Leverage user behavior analytics and anomaly detection techniques to identify and respond to suspicious user activities proactively.</li>
+    </ul>
+
+    <h2>Device Management in Microsoft Security Technology</h2>
+    <h3>Introduction</h3>
+    <p>Effective device management is crucial for maintaining a strong security posture.</p>
+
+    <h3>Detailed Analysis</h3>
+    <h4>Device Overview:</h4>
+    <canvas id="osSummaryChart"></canvas>
+
+<script>
+    var osSummaryData = {{ device_risk.os_summary.to_dict() | tojson }};
+
+    var labels = Object.keys(osSummaryData);
+    var counts = Object.values(osSummaryData);
+
+    var ctx = document.getElementById('osSummaryChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Count',
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)'
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    stepSize: 1
+                }
+            }
+        }
+    });
+</script>
+
+<p>Domain Sprawl:</p>
+<canvas id="domainSprawlChart"></canvas>
+
+<script>
+    var domainSprawlData = {{ device_risk.patch_summary.to_dict() | tojson }};
+
+    var labels = Object.keys(domainSprawlData);
+    var counts = Object.values(domainSprawlData);
+
+    var ctx = document.getElementById('domainSprawlChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Count',
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)'
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    stepSize: 1
+                }
+            }
+        }
+    });
+</script>
+    <p>OS Summary:</p>
+    <ul>
+        {% for os, count in device_risk.os_summary.items() %}
+            <li>{{ os }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Domain Sprawl:</p>
+    <ul>
+        {% for domain, count in device_risk.patch_summary.items() %}
+            <li>{{ domain }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Risk Summary:</p>
+    <canvas id="riskSummaryBarGraph"></canvas>
+
+<script>
+var riskSummaryData = {{ device_risk.risk_summary.to_dict() | tojson }};
+    delete riskSummaryData['No known risks'];
+
+    var labels = Object.keys(riskSummaryData);
+    var counts = Object.values(riskSummaryData);
+
+    var ctx = document.getElementById('riskSummaryBarGraph').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.6)'
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    stepSize: 1
+                }
+            }
+        }
+    });
+</script>
+    <ul>
+        {% for risk_level, count in device_risk.risk_summary.items() %}
+            <li>{{ risk_level }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h4>High-Risk Device Analysis</h4>
+    <p>Number of Active High-Risk Devices: {{ device_risk.high_risk_devices }}</p>
+
+    <h5>Sample of High-Risk Devices:</h5>
+    <table>
+        <thead>
+            <tr>
+                <th>Device Name</th>
+                <th>Risk Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in device_risk.top_high_risk_devices.itertuples(index=False) %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Actionable Insights</h3>
+    <p>Based on the analysis of your devices, we have identified the following actionable insights:</p>
+    
+    <ul>
+        <li>Prioritize the remediation of devices with high risk levels and exposure scores. These devices have active compromising behavior and severe attack surfaces that need immediate attention.</li>
+        <li>Focus on patching and updating the software and operating systems on these high-risk devices to mitigate vulnerabilities and reduce the attack surface.</li>
+        <li>Conduct a manual review of the circumstances surrounding each high-risk device to identify any specific security gaps or misconfigurations that need to be addressed.</li>
+        <li>Implement stricter access controls and monitoring for high-risk devices to detect and respond to any suspicious activities promptly.</li>
+        <li>Regularly assess the security posture of your devices and maintain a proactive patch management process to ensure timely remediation of vulnerabilities.</li>
+    </ul>
+    
+    {% if device_risk.high_exposure_devices_summary.empty %}
+        <p>No devices with high exposure levels were identified in the provided data.</p>
+    {% else %}
+        <p>The following devices have been identified as having high risk levels and exposure scores:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Device Name</th>
+                    <th>Risk Level</th>
+                    <th>Exposure Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for _, row in device_risk.high_exposure_devices_summary.iterrows() %}
+                    <tr>
+                        <td>{{ row['Device Name'] }}</td>
+                        <td>{{ row['Risk Level'] }}</td>
+                        <td>{{ row['Exposure Level'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>We recommend prioritizing the remediation efforts for these devices to minimize the risk of potential security incidents.</p>
+    {% endif %}
+
+    <h2>M365 Incident Management</h2>
+    <h3>Introduction</h3>
+    <p>Incident analysis helps understand threats and refine response strategies.</p>
+
+    <h3>Detailed Incident Insights and Recommendations</h3>
+    <p>Number of High Severity Incidents: {{ incidents.high_severity_incidents }}</p>
+
+    <canvas id="incidentSeverityChart"></canvas>
+
+    <script>
+        var incidentSeverityData = {{ incidents.incident_severity_counts.to_dict() | tojson }};
+    
+        var labels = Object.keys(incidentSeverityData);
+        var counts = Object.values(incidentSeverityData);
+    
+        var ctx = document.getElementById('incidentSeverityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+    </script>
+
+    <h4>Incident Summary:</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Incident Name</th>
+                <th>Severity</th>
+                <th>Impacted Assets</th>
+                <th>Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in incidents.incident_summary.itertuples(index=False) %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Correlation with User and Device Data</h3>
+    <p>Suspected connections between high-risk devices, users, and high-severity incidents indicate potentially more concerning compromising activity. Please review the following correlations and investigate further:</p>
+    
+    <h4>User-Incident Correlations:</h4>
+    {% if incidents.user_incident_correlation.empty %}
+        <p>No user-incident correlations found for high-risk users and high-severity incidents.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Incident Name</th>
+                    <th>User/UPN</th>
+                    <th>User Risk Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for _, row in incidents.user_incident_correlation.iterrows() %}
+                    <tr>
+                        <td>{{ row['Incident Name'] }}</td>
+                        <td>{{ row['User/UPN'] }}</td>
+                        <td>{{ row['User Risk Level'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    <h4>Device-Incident Correlations:</h4>
+    {% if incidents.device_incident_correlation.empty %}
+        <p>No device-incident correlations found for high-risk devices and high-severity incidents.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Incident Name</th>
+                    <th>Device Name</th>
+                    <th>Device Risk Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for _, row in incidents.device_incident_correlation.iterrows() %}
+                    <tr>
+                        <td>{{ row['Incident Name'] }}</td>
+                        <td>{{ row['Device Name'] }}</td>
+                        <td>{{ row['Device Risk Level'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    <h3>Actionable Insights and Recommendations</h3>
+    <ul>
+        <li>Prioritize the investigation and remediation of high-severity incidents, focusing on those with potential user and device correlations.</li>
+        <li>Conduct a thorough review of the identified user accounts and devices to determine the scope and impact of any compromising activity.</li>
+        <li>Implement stricter access controls and monitoring for the identified user accounts and devices to prevent further unauthorized access and data exfiltration.</li>
+        <li>Regularly review and update incident response procedures to ensure timely and effective handling of security incidents.</li>
+        <li>Conduct regular user awareness training to educate employees about the importance of reporting suspicious activities and following security best practices.</li>
+        <li>Implement multi-factor authentication (MFA) for all user accounts to add an extra layer of security and mitigate the risk of compromised credentials.</li>
+        <li>Establish a continuous monitoring and threat hunting program to proactively identify and respond to potential security threats.</li>
+        <li>Engage with external security experts or managed security service providers to augment your internal security capabilities and stay up-to-date with the latest threat landscape.</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>Addressing the identified issues is essential to strengthen the organization's security posture. Consider additional services for a more robust security framework.</p>
+    <script>
+        var productDeploymentData = {{ product_deployment.to_json(orient='records') | safe }};
+
+        var labels = productDeploymentData.map(function(item) {
+            return item['Product'];
+        });
+
+        var achievedPoints = productDeploymentData.map(function(item) {
+            return item['Points Achieved'];
+        });
+
+        var possiblePoints = productDeploymentData.map(function(item) {
+            return item['Points Possible'];
+        });
+
+        var ctx = document.getElementById('productDeploymentChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Points Achieved',
+                    data: achievedPoints,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderWidth: 1
+                }, {
+                    label: 'Points Possible',
+                    data: possiblePoints,
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>   
+</body>
+</html>

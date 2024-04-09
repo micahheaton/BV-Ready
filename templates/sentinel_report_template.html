@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Optimization Assessment</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        canvas {
+            max-width: 100%;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentinel Optimization Assessment</h1>
+
+        <h2>Executive Summary</h2>
+        <p>{{ company_name }} is a company headquartered in {{ hq_country }} with {{ total_employees }} employees. They are currently using {{ existing_siem_solution }} as their SIEM solution and have a data retention policy of {{ data_retention_policy }}.</p>
+        <p>The key findings from the assessment include:</p>
+        <ul>
+            {% for finding in executive_summary.key_findings %}
+            <li>{{ finding }}</li>
+            {% endfor %}
+        </ul>
+        <p>The main recommendations for {{ company_name }} are:</p>
+        <ul>
+            {% for recommendation in executive_summary.recommendations %}
+            <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Sentinel Deployment Assessment</h2>
+        <h3>Current State</h3>
+        <p>The current Sentinel setup in {{ company_name }} is {{ sentinel_deployment_assessment.current_state.sentinel_setup }}. They have {{ sentinel_deployment_assessment.current_state.sentinel_instances_count }} Sentinel instances and are using {{ sentinel_deployment_assessment.current_state.m365_licensing }} licensing.</p>
+        <p>The deployed Microsoft 365 Defender products include:</p>
+        <ul>
+            {% for product in sentinel_deployment_assessment.current_state.defender_products %}
+            <li>{{ product }}</li>
+            {% endfor %}
+        </ul>
+        <p>{{ company_name }} has {{ sentinel_deployment_assessment.current_state.workstations_count }} workstations and {{ sentinel_deployment_assessment.current_state.servers_count }} servers in their environment. They are currently using {{ sentinel_deployment_assessment.current_state.current_edr_technology }} as their EDR technology.</p>
+
+        <h3>Log Sources</h3>
+        <p>The current log sources being ingested into Sentinel are:</p>
+        <ul>
+            {% for source in sentinel_deployment_assessment.log_sources.current_sources %}
+            <li>{{ source }}</li>
+            {% endfor %}
+        </ul>
+        <p>Potential gaps in log source coverage: {{ sentinel_deployment_assessment.log_sources.potential_gaps }}</p>
+        <p>Planned integrations from Cortex Data Lake:</p>
+        <ul>
+            {% for integration in sentinel_deployment_assessment.log_sources.planned_integrations %}
+            <li>{{ integration }}</li>
+            {% endfor %}
+        </ul>
+        <canvas id="logSourceChart"></canvas>
+
+        <h3>External Ingestion</h3>
+        <p>Challenges with external ingestion:</p>
+        <ul>
+            {% for challenge in sentinel_deployment_assessment.external_ingestion.challenges %}
+            <li>{{ challenge }}</li>
+            {% endfor %}
+        </ul>
+        <p>Proposed solutions: {{ sentinel_deployment_assessment.external_ingestion.solutions }}</p>
+
+        <h3>Data Volume and Cost</h3>
+        <p>The total estimated data volume ingested into Sentinel is {{ sentinel_deployment_assessment.data_volume_and_cost.total_data_volume }} GB per day.</p>
+        <canvas id="dataVolumeChart"></canvas>
+        <canvas id="dataVolumeByTierChart"></canvas>
+        <p>The estimated monthly cost for Sentinel is ${{ sentinel_deployment_assessment.data_volume_and_cost.estimated_monthly_cost }}.</p>
+        <canvas id="costBreakdownChart"></canvas>
+        <p>{{ company_name }} has {{ sentinel_deployment_assessment.data_volume_and_cost.azure_defender_vm_count }} VMs with Azure Defender enabled, resulting in a potential benefit of {{ sentinel_deployment_assessment.data_volume_and_cost.azure_defender_benefit_gb_per_day }} GB per day of free data ingestion.</p>
+
+        <h2>Content and Detection Optimization</h2>
+        <h3>MITRE ATT&CK Alignment</h3>
+        <p>Current alignment with the MITRE ATT&CK framework: {{ content_and_detection_optimization.mitre_attack_alignment.current_state }}</p>
+        <p>Recommendations for improving alignment:</p>
+        <ul>
+            <li>{{ content_and_detection_optimization.mitre_attack_alignment.recommendations }}</li>
+        </ul>
+
+        <h3>Detection Strategy</h3>
+        <p>Current detection strategy: {{ content_and_detection_optimization.detection_strategy.current_state }}</p>
+        <p>Recommendations for enhancing detection:</p>
+        <ul>
+            <li>{{ content_and_detection_optimization.detection_strategy.recommendations }}</li>
+        </ul>
+
+        <h3>Hunting Opportunities</h3>
+        <p>Current hunting practices: {{ content_and_detection_optimization.hunting_opportunities.current_state }}</p>
+        <p>Recommendations for expanding hunting capabilities:</p>
+        <ul>
+            <li>{{ content_and_detection_optimization.hunting_opportunities.recommendations }}</li>
+        </ul>
+
+        <h2>Integration and Log Source Management</h2>
+        <h3>Integration Challenges</h3>
+        <p>Current integration challenges:</p>
+        <ul>
+            {% for challenge in integration_and_log_source_management.integration_challenges.current_state %}
+            <li>{{ challenge }}</li>
+            {% endfor %}
+        </ul>
+        <p>Proposed solutions:</p>
+        <ul>
+            <li>{{ integration_and_log_source_management.integration_challenges.solutions }}</li>
+        </ul>
+
+        <h3>Log Source Prioritization</h3>
+        <p>Current log source prioritization: {{ integration_and_log_source_management.log_source_prioritization.current_state }}</p>
+        <p>Recommendations for log source prioritization:</p>
+        <ul>
+            <li>{{ integration_and_log_source_management.log_source_prioritization.recommendations }}</li>
+        </ul>
+
+        <h2>Cost-Benefit Analysis</h2>
+        <h3>Data Costs vs. Detection Opportunities</h3>
+        <p>Current approach to balancing data costs and detection opportunities: {{ cost_benefit_analysis.data_costs_vs_detection_opportunities.current_state }}</p>
+        <p>Analysis:</p>
+        <ul>
+            <li>{{ cost_benefit_analysis.data_costs_vs_detection_opportunities.analysis }}</li>
+        </ul>
+
+        <h3>Compliance and Legal Requirements</h3>
+        <p>Current priority for compliance and legal requirements: {{ cost_benefit_analysis.compliance_and_legal_requirements.current_state }}</p>
+        <p>Analysis:</p>
+        <ul>
+            <li>{{ cost_benefit_analysis.compliance_and_legal_requirements.analysis }}</li>
+        </ul>
+
+        <h3>Commitment Tier Prices</h3>
+        <canvas id="commitmentTierPricesChart"></canvas>
+
+        <h3>Commitment Tier Savings</h3>
+        <canvas id="commitmentTierSavingsChart"></canvas>
+
+        <h2>Roadmap and Next Steps</h2>
+        <h3>Key Recommendations</h3>
+        <ul>
+            {% for recommendation in roadmap_and_next_steps.key_recommendations %}
+            <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+
+        <h3>Implementation Roadmap</h3>
+        <p>{{ roadmap_and_next_steps.implementation_roadmap }}</p>
+
+        <h3>Next Steps</h3>
+        <p>{{ roadmap_and_next_steps.next_steps }}</p>
+
+        <h2>Additional Data</h2>
+        <p><strong>Compliance Requirements:</strong> {{ additional_data.compliance_requirements }}</p>
+        <p><strong>Microsoft 365 Customer:</strong> {{ additional_data.m365_customer }}</p>
+        <p><strong>Azure Infrastructure:</strong> {{ additional_data.azure_infrastructure }}</p>
+        <p><strong>Endpoint Management Tools:</strong> {{ additional_data.endpoint_management_tools }}</p>
+        <p><strong>Azure Region:</strong> {{ additional_data.azure_region }}</p>
+        <p><strong>Currency:</strong> {{ additional_data.currency }}</p>
+        <p><strong>Customer Discount:</strong> {{ additional_data.customer_discount }}%</p>
+        <p><strong>Data Retention Period:</strong> {{ additional_data.data_retention_period }} months</p>
+    </div>
+
+    <script>
+        // Log Source Chart
+        var logSourceCtx = document.getElementById('logSourceChart').getContext('2d');
+        var logSourceChart = new Chart(logSourceCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ additional_data.log_source_counts.labels | tojson }},
+                datasets: [{
+                    label: 'Log Source Counts',
+                    data: {{ additional_data.log_source_counts.values }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+
+        // Data Volume by Source Chart
+        var dataVolumeCtx = document.getElementById('dataVolumeChart').getContext('2d');
+        var dataVolumeChart = new Chart(dataVolumeCtx, {
+            type: 'pie',
+            data: {
+                labels: {{ sentinel_deployment_assessment.data_volume_and_cost.data_volume_by_source.labels | tojson }},
+                datasets: [{
+                    data: {{ sentinel_deployment_assessment.data_volume_and_cost.data_volume_by_source.values }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Data Volume by Source'
+                    }
+                }
+            }
+        });
+
+        // Data Volume by Tier Chart
+        var dataVolumeByTierCtx = document.getElementById('dataVolumeByTierChart').getContext('2d');
+        var dataVolumeByTierChart = new Chart(dataVolumeByTierCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ sentinel_deployment_assessment.data_volume_and_cost.data_volume_by_tier.labels | tojson }},
+                datasets: [{
+                    label: 'Data Volume (GB/day)',
+                    data: {{ sentinel_deployment_assessment.data_volume_and_cost.data_volume_by_tier.values }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Data Volume by Commitment Tier'
+                    }
+                }
+            }
+        });
+
+        // Cost Breakdown Chart
+        var costBreakdownCtx = document.getElementById('costBreakdownChart').getContext('2d');
+        var costBreakdownChart = new Chart(costBreakdownCtx, {
+            type: 'doughnut',
+            data: {
+                labels: {{ sentinel_deployment_assessment.data_volume_and_cost.cost_breakdown.labels | tojson }},
+                datasets: [{
+                    data: {{ sentinel_deployment_assessment.data_volume_and_cost.cost_breakdown.values }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Cost Breakdown'
+                    }
+                }
+            }
+        });
+
+        // Commitment Tier Prices Chart
+        var commitmentTierPricesCtx = document.getElementById('commitmentTierPricesChart').getContext('2d');
+        var commitmentTierPricesChart = new Chart(commitmentTierPricesCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ cost_benefit_analysis.commitment_tier_prices.labels | tojson }},
+                datasets: [{
+                    label: 'Price per GB',
+                    data: {{ cost_benefit_analysis.commitment_tier_prices.values }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Commitment Tier Prices'
+                    }
+                }
+            }
+        });
+
+        // Commitment Tier Savings Chart
+        var commitmentTierSavingsCtx = document.getElementById('commitmentTierSavingsChart').getContext('2d');
+        var commitmentTierSavingsChart = new Chart(commitmentTierSavingsCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ cost_benefit_analysis.commitment_tier_savings.labels | tojson }},
+                datasets: [{
+                    label: 'Savings Over Pay-As-You-Go',
+                    data: {{ cost_benefit_analysis.commitment_tier_savings.values }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        callback: function(value, index, values) {
+                            return value + '%';
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Commitment Tier Savings'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.parsed.y + '%';
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
