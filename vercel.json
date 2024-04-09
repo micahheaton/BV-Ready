@@ -1,0 +1,26 @@
+{
+    "builds": [
+      {
+        "src": "*.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/",
+        "dest": "index.html"
+      },
+      {
+        "src": "/TGAreport_generator",
+        "dest": "TGAreport_generator.py"
+      },
+      {
+        "src": "/report_generator",
+        "dest": "report_generator.py"
+      },
+      {
+        "src": "/sentinel_report_generator",
+        "dest": "sentinel_report_generator.py"
+      }
+    ]
+  }
