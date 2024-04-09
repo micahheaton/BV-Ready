@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copilot for Security Readiness Assessment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+        header {
+            background-color: #000000;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 4.5vw;
+            color: #FFFFFF;
+            text-transform: none;
+            font-weight: 700;
+            font-style: normal;
+            line-height: 1.25;
+            letter-spacing: -3px;
+            margin-bottom: 0;
+        }
+        h2 {
+            font-size: 2vw;
+            color: #000000;
+            text-transform: none;
+            font-weight: 700;
+            font-style: normal;
+            line-height: 1.45;
+            letter-spacing: 0;
+            margin-bottom: 20px;
+        }
+        h3 {
+            font-size: 1.75vw;
+            color: #000000;
+            text-transform: none;
+            font-weight: 400;
+            font-style: normal;
+            line-height: 1.45;
+            letter-spacing: 0;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.25vw;
+            color: #000000;
+            text-transform: none;
+            font-weight: 100;
+            font-style: normal;
+            line-height: 1.25;
+            letter-spacing: -0.7px;
+            margin-bottom: 15px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #000000;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #8DEDC7;
+            color: #000000;
+            font-weight: 700;
+        }
+        ul {
+            margin-bottom: 20px;
+        }
+        li {
+            font-size: 1vw;
+            color: #000000;
+            text-transform: none;
+            font-weight: 100;
+            font-style: normal;
+            line-height: 1.25;
+            letter-spacing: -0.3px;
+            margin-bottom: 5px;
+        }
+        button {
+            font-size: 1vw;
+            color: #FFFFFF;
+            text-transform: capitalize;
+            font-weight: 300;
+            font-style: normal;
+            background-color: #0659FF;
+            line-height: 1;
+            letter-spacing: 0;
+            border: none;
+            padding: 1.2vw 1.6vw;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            color: #0659FF;
+            background-color: #FFFFFF;
+        }
+        .logo {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-heading {
+            font-size: 2.5vw;
+            color: #000000;
+            text-transform: none;
+            font-weight: 300;
+            font-style: normal;
+            line-height: 1.1;
+            letter-spacing: -1.9px;
+            margin-bottom: 20px;
+        }
+        .section-content {
+            background-color: #F7F7F7;
+            padding: 20px;
+        }
+        .chart-container {
+            margin-bottom: 20px;
+        }
+        <style>
+    .section-heading {
+        color: #0659FF;
+        font-size: 2.5vw;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    
+    .section-content {
+        background-color: #F7F7F7;
+        padding: 30px;
+    }
+    
+    .section-content h3 {
+        color: #000000;
+        font-size: 1.75vw;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    
+    .section-content p {
+        color: #000000;
+        font-size: 1.25vw;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+</style>
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://res.cloudinary.com/brandpad/image/upload/c_scale,dpr_auto,f_auto,w_768/v1681240120/15526/bluevoyant_lock-up_emailsignature" alt="BlueVoyant Logo" class="logo">
+        <h1>Microsoft Security Diagnostic Review</h1>
+        <h1>and</h1> 
+        <h1>Copilot for Security Readiness Assessment</h1>
+    </header>
+    
+    <div class="section">
+        <h2>Congratulations! You're a great candidate for Copilot for Security. But there is some work to do.</h2>
+    </div>
+    
+    <div class="section">
+        <h3>Microsoft Security Product Deployment Status</h3>
+        <p>The following bar graph illustrates the deployment status of Microsoft security products based on the points achieved in the Secure Score:</p>
+        <div class="chart-container">
+            <canvas id="productDeploymentChart"></canvas>
+        </div>
+    </div>
+    
+   
+    <div class="section">
+        <h2>What is Copilot for Security?</h2>
+        <p>Copilot for Security is an AI-powered analysis and investigation tool from Microsoft that integrates with their security products to enhance threat detection, response, and overall security posture. It empowers various security stakeholders, including SecOps, ITOps, and CISOs, to make data-driven decisions and streamline security operations.</p>
+    </div>
+
+        <div class="section">
+        <h3>Copilot for Security Use Case Consideration</h3>
+        <ul>
+            <li>SecOps and SOC analysts can leverage Copilot for Security to expedite incident investigation and response by utilizing AI-powered insights and recommendations.</li>
+            <li>ITOps and End User Compute teams can benefit from Copilot for Security's proactive threat detection capabilities to identify and mitigate potential risks before they impact end-users.</li>
+            <li>CISOs can use Copilot for Security to gain a holistic view of the organization's security posture and make informed decisions on resource allocation and risk management strategies.</li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>Your Journey to Copilot for Security Activation and Maturity</h2>
+        <p>To maximize the benefits of Copilot for Security, it is crucial to have the prerequisite Microsoft security tools properly deployed and configured. This report will assess your organization's readiness for Copilot for Security based on the deployment status of these tools, as reflected in your Microsoft Secure Score.</p>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-heading">Introduction to BlueVoyant's Commitment</h2>
+        <div class="section-content">
+            <h3>Enhancing Your Microsoft Security Journey</h3>
+            <p>At BlueVoyant, we recognize the pivotal role that robust cybersecurity plays in today's digital landscape, especially within the Microsoft ecosystem. Our commitment is to guide and support organizations at various stages of their Microsoft security journey, ensuring they fully leverage the comprehensive security capabilities that Microsoft solutions offer.</p>
+            <p>Our expertise is not just in providing solutions but in understanding the unique context of each organization, enabling us to tailor our services to meet your specific security needs. Whether you're embarking on your journey with Microsoft's security technologies or seeking to enhance an existing infrastructure, BlueVoyant is your dedicated partner, committed to your cybersecurity resilience and success.</p>
+            
+            <h3>The Report</h3>
+            <p>This report delves into a detailed analysis of CSV files extracted from your M365 and Azure environments. The goal is to conduct a thorough gap analysis, identify areas of strength and potential vulnerabilities, and provide strategic recommendations to bolster your security posture. By examining incidents, user activities, and device statuses, we gain valuable insights that inform our comprehensive security recommendations tailored to your organizational needs.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-heading">M365 Threat Gap Analysis Report</h2>
+        <div class="section-content">
+            <h3>Introduction</h3>
+            <p>This report provides a detailed analysis of your current Microsoft Secure Score, highlighting key areas where your organization is performing well and identifying opportunities for improvement. Our aim is to guide you in enhancing your security posture effectively.</p>
+            
+            <h3>Microsoft Secure Score - Security Improvement Report</h3>
+            <div class="chart-container" style="width: 40%; margin: 0 auto;">
+                <canvas id="secureScorePieChart"></canvas>
+            </div>
+            <script>
+                var secureScoreData = {
+                    completed: {{ secure_score.secure_score_completed }},
+                    toAddress: {{ secure_score.secure_score_to_address }}
+                };
+                var ctx = document.getElementById('secureScorePieChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Completed', 'To Address'],
+                        datasets: [{
+                            data: [secureScoreData.completed, secureScoreData.toAddress],
+                            backgroundColor: ['#8DEDC7', '#676BFB']
+                        }]
+                    }
+                });
+            </script>
+            <p>Current Secure Score: {{ secure_score.secure_score_completed }}% completed, {{ secure_score.secure_score_to_address }}% to address</p>
+            <p>Active Devices: {{ device_risk.active_devices_count }}</p>
+            <p>Inactive Devices: {{ device_risk.inactive_devices_count }}</p>
+            
+            <h3>Analysis Overview</h3>
+            <p>The Microsoft Secure Score reflects a comprehensive assessment of your organization's security posture across various categories. By addressing the recommended actions, you can significantly improve your security defenses and reduce potential vulnerabilities.</p>
+    
+            <h3>Recommendation Status Breakdown</h3>
+            <div class="category-charts">
+                {% for _, row in secure_score.category_scores.iterrows() %}
+                    <div class="category-chart">
+                        <h4>{{ row['Category'] }}:</h4>
+                        <div class="chart-container">
+                            <canvas id="categoryPieChart{{ loop.index }}"></canvas>
+                        </div>
+                        <script>
+                            var categoryData{{ loop.index }} = {
+                                completed: {{ row['Completed Percentage'] | round(1) }},
+                                toAddress: {{ row['To Address Percentage'] | round(1) }}
+                            };
+                            var ctx{{ loop.index }} = document.getElementById('categoryPieChart{{ loop.index }}').getContext('2d');
+                            new Chart(ctx{{ loop.index }}, {
+                                type: 'pie',
+                                data: {
+                                    labels: ['Completed', 'To Address'],
+                                    datasets: [{
+                                        data: [categoryData{{ loop.index }}.completed, categoryData{{ loop.index }}.toAddress],
+                                        backgroundColor: ['#8DEDC7', '#676BFB']
+                                    }]
+                                }
+                            });
+                        </script>
+                        <ul>
+                            <li>Completed: {{ row['Completed Percentage'] | round(1) }}%</li>
+                            <li>To Address: {{ row['To Address Percentage'] | round(1) }}%</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .category-charts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .category-chart {
+            width: calc(25% - 20px);
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .category-chart {
+                width: calc(50% - 20px);
+            }
+        }
+    </style>
+
+            <h3>Key Insights</h3>
+            <ul>
+                <li>Prioritize implementing the following high-impact actions:
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Action Name</th>
+                                <th>Points Possible</th>
+                                <th>Points Achieved</th>
+                                <th>Score Difference</th>
+                                <th>Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for action in secure_score.top_actions_to_prioritize %}
+                                <tr>
+                                    <td>{{ action[0] }}</td>
+                                    <td>{{ action[1] }}</td>
+                                    <td>{{ action[2] }}</td>
+                                    <td>{{ action[3] }}</td>
+                                    <td>{{ action[4] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+            
+            <h3>Recommendations</h3>
+            <ul>
+                <li>Regularly review and prioritize the implementation of recommended actions based on their potential impact and relevance to your organization's security posture.</li>
+                <li>Assign ownership and establish timelines for addressing the identified actions, focusing on the top categories and high-impact actions.</li>
+                <li>Conduct periodic assessments to track progress and ensure continuous improvement in your Microsoft Secure Score.</li>
+                <li>Leverage the Microsoft Secure Score dashboard to gain insights into your security posture and benchmark your progress against industry peers.</li>
+                <li>Engage with relevant stakeholders and decision-makers to allocate resources and prioritize the implementation of security recommendations.</li>
+            </ul>
+        </div>
+    </div>
+    
+ <div class="section">
+    <h2 class="section-heading">Threat and Vulnerability Management (TVM) in Microsoft Defender for Endpoint</h2>
+    <div class="section-content">
+        <h3>Introduction to TVM's Value</h3>
+        <p>Threat and Vulnerability Management (TVM) is a pivotal function within Microsoft Defender for Endpoint, designed to provide a continuous, real-time assessment of your organization's threat landscape and vulnerability status. This capability is integral to the ecosystem of Microsoft security products, offering a proactive approach to identifying, prioritizing, and addressing potential vulnerabilities before they can be exploited by adversaries.</p>
+        <p>By leveraging the power of TVM, organizations gain valuable insights into their security posture, enabling them to make informed decisions and take timely actions to fortify their defenses. The integration of TVM within the broader Microsoft security ecosystem ensures that your organization benefits from a holistic, unified approach to threat detection, response, and prevention.</p>
+
+        <h3>Why TVM Matters for Your Security Journey</h3>
+        <p>In today's dynamic threat environment, staying ahead of potential risks is more crucial than ever. TVM empowers your organization to:</p>
+        <ul>
+            <li>Identify Vulnerabilities: Quickly detect weaknesses in your environment, from software vulnerabilities to misconfigurations.</li>
+            <li>Prioritize Remediation: Understand the context and potential impact of each vulnerability, allowing you to focus on addressing the most critical issues first.</li>
+            <li>Enhance Security Posture: Continuously improve your defenses by mitigating identified vulnerabilities, reducing the attack surface available to potential attackers.</li>
+            <li>Comply with Regulations: Maintain adherence to security standards and regulations by proactively managing vulnerabilities and demonstrating your commitment to security.</li>
+        </ul>
+        <p>By integrating TVM into your security strategy, you not only strengthen your defenses but also align your organization with best practices in cybersecurity, positioning you to better navigate the complexities of the modern threat landscape.</p>
+
+        <h3>Detailed Analysis</h3>
+        <div class="chart-container">
+            <canvas id="tvmBarGraph"></canvas>
+        </div>
+
+        <script>
+            var tvmData = {
+                totalRecommendations: {{ tvm.total_recommendations }},
+                activeRecommendations: {{ tvm.active_recommendations }}
+            };
+        
+            var ctx = document.getElementById('tvmBarGraph').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Total Recommendations', 'Active Recommendations'],
+                    datasets: [{
+                        data: [tvmData.totalRecommendations, tvmData.activeRecommendations],
+                        backgroundColor: '#8DEDC7'
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+
+<p>Total Recommendations: {{ tvm.total_recommendations }}</p>
+<p>Active Recommendations: {{ tvm.active_recommendations }}</p>
+<p>Exposure Analysis: Average Exposure Score - {{ tvm.exposure_score_avg }}</p>
+
+<h4>Top 10 Security Recommendations with Impacted Devices:</h4>
+<table>
+    <thead>
+        <tr>
+            <th>Security Recommendation</th>
+            <th>Exposure Score Impact</th>
+            <th>Exposed Machines</th>
+            <th>Total Machines</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for recommendation in tvm.top_recommendations.itertuples(index=False) %}
+            <tr>
+                <td>{{ recommendation[0] }}</td>
+                <td>{{ recommendation[1] }}</td>
+                <td>{{ recommendation[2] }}</td>
+                <td>{{ recommendation[3] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+        <h3>Actionable Steps</h3>
+        <ul>
+            <li>Prioritize the remediation of vulnerabilities based on their exposure score impact and the criticality of the affected assets.</li>
+            <li>Establish a regular patch management process to ensure timely deployment of security updates across your environment.</li>
+            <li>If you have existing third-party patching or vulnerability management software, ensure it is properly configured and covers all your critical assets.</li>
+            <li>If you don't have a dedicated solution for vulnerability management, consider adopting a comprehensive vulnerability management service like <a href="https://www.bluevoyant.com/services/visibl-vulnerability-identification-services" target="_blank">BlueVoyant's Visibl Vulnerability Identification Services</a>.</li>
+            <li>If you have limited internal resources to manage software vulnerabilities, partnering with a trusted security provider can help you streamline your vulnerability management efforts.</li>
+        </ul>
+
+        <p>To learn more about BlueVoyant's vulnerability management service and how it can benefit your organization, click the button below to send a Microsoft Teams message to our team:</p>
+        <a href="mailto:microsoft@bluevoyant.com?subject=Inquiry%20about%20Vulnerability%20Management%20Service&body=Hello%2C%0A%0AI%20would%20like%20to%20learn%20more%20about%20BlueVoyant%27s%20vulnerability%20management%20service.%20Please%20let%20me%20know%20how%20we%20can%20schedule%20a%20discussion.%0A%0AThank%20you%2C%0A%5BYour%20Name%5D" target="_blank"><button>Contact BlueVoyant</button></a>
+        
+        {% if device_risk.active_devices_count > 500 %}
+            <p>As your organization has more than 500 devices, we highly recommend scheduling a demonstration of our vulnerability management service. Click the button below to book a convenient time slot:</p>
+            <a href="https://calendly.com/bluevoyant/vulnerability-management-demo" target="_blank"><button>Schedule a Demo</button></a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="section">
+    <h2 class="section-heading">User Detections in Microsoft Security Technology</h2>
+    <div class="section-content">
+        <h3>Introduction to User Detection's Value</h3>
+        <p>User detections within Microsoft Security Technology play a crucial role in identifying and responding to potential security threats that target individual users within an organization. By monitoring user activities and detecting anomalous or risky behaviors, this technology provides early warning signs of potential security incidents, enabling proactive measures to mitigate threats.</p>
+        <p>Integrating user detection capabilities with the broader Microsoft security ecosystem, including Threat and Vulnerability Management (TVM) and Secure Score recommendations, offers a comprehensive approach to organizational security. While TVM focuses on system vulnerabilities and Secure Score provides a broader security posture assessment, user detections concentrate on the human element, highlighting the importance of user behavior in maintaining robust security.</p>
+
+        <h3>Why User Detections Matter for Your Security Journey</h3>
+        <p>The human factor often represents one of the most significant vulnerabilities in an organization's security framework. User detections address this by:</p>
+        <ul>
+            <li>Identifying Risky Behaviors: Pinpointing actions that deviate from normal patterns or pose security risks.</li>
+            <li>Enhancing Incident Response: Providing detailed insights into user-related incidents, enabling faster and more effective responses.</li>
+            <li>Informing Training and Policies: Guiding the development of targeted training programs and security policies to address common user-related risks.</li>
+            <li>Complementing Other Security Measures: Working in tandem with TVM and Secure Score to offer a multi-faceted view of an organization's security posture, ensuring no aspect is overlooked.</li>
+        </ul>
+
+
+
+        <h3>Detailed Analysis</h3>
+        <h4>Important Detection Types:</h4>
+        {% if user_risk.important_detections.empty %}
+            <p>No important detection types found.</p>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Detection Type</th>
+                        <th>Documentation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for _, row in user_risk.important_detections.iterrows() %}
+                        <tr>
+                            <td>{{ row['User'] }}</td>
+                            <td>{{ row['Detection type'] }}</td>
+                            <td><a href="{{ row['Documentation URL'] }}" target="_blank">Learn More</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <h4>Top 10 Highest Risk Users:</h4>
+        {% if user_risk.top_users_with_prominent_detection.empty %}
+            <p>No high-risk users with "At risk" state found.</p>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>UPN</th>
+                        <th>Incident Count</th>
+                        <th>Risk Level</th>
+                        <th>Most Prominent Detection</th>
+                        <th>Detection Type Details</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for _, row in user_risk.top_users_with_prominent_detection.iterrows() %}
+                        <tr>
+                            <td>{{ row['User'] }}</td>
+                            <td>{{ row['UPN'] }}</td>
+                            <td>{{ row['Incident Count'] }}</td>
+                            <td>{{ row['Risk level'] }}</td>
+                            <td>{{ row['Most Prominent Detection'] }}</td>
+                            <td><a href="{{ row['Detection Type URL'] }}" target="_blank">Learn More</a></td>
+                            <td>{{ row['Location'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <h3>Actionable Insights</h3>
+        <ul>
+            <li>Investigate high-risk user detections promptly to determine the root cause and potential impact of the detected activities.</li>
+            <li>Implement risk-based authentication and conditional access policies to enforce stricter security controls for high-risk users and scenarios.</li>
+            <li>Conduct targeted user education and awareness campaigns to help users recognize and report suspicious activities, such as phishing attempts or unauthorized access.</li>
+            <li>Regularly review and update user access permissions to ensure the principle of least privilege is applied and users have access only to the resources they need.</li>
+            <li>Implement multi-factor authentication (MFA) for all user accounts to add an extra layer of security and mitigate the risk of compromised credentials.</li>
+            <li>Establish a process for timely offboarding of user accounts when employees leave the organization to prevent unauthorized access.</li>
+            <li>Leverage user behavior analytics and anomaly detection techniques to identify and respond to suspicious user activities proactively.</li>
+        </ul>
+
+        <p>To learn more about BlueVoyant's Microsoft 365 Entra services and how they can benefit your organization, visit our <a href="https://www.bluevoyant.com/knowledge-center/microsoft-365-defender" target="_blank">Microsoft 365 Defender Knowledge Center</a>.</p>
+
+        <p>If you have any questions or would like to discuss how BlueVoyant can assist you in enhancing your user detection capabilities, click the button below to send us an email:</p>
+        <a href="mailto:microsoft@bluevoyant.com?subject=Inquiry%20about%20User%20Detection%20Services&body=Hello%2C%0A%0AI%20would%20like%20to%20learn%20more%20about%20BlueVoyant%27s%20user%20detection%20services.%20Please%20let%20me%20know%20how%20we%20can%20schedule%20a%20discussion.%0A%0AThank%20you%2C%0A%5BYour%20Name%5D" target="_blank"><button>Contact BlueVoyant</button></a>
+
+        <p>You can also schedule a meeting with our team at your convenience by clicking the button below:</p>
+        <a href="https://calendly.com/bluevoyant/user-detection-services" target="_blank"><button>Schedule a Meeting</button></a>
+    </div>
+</div>
+
+
+
+<div class="section"> <h2 class="section-heading">Device Management in Microsoft Security Technology</h2> <div class="section-content"> <h3>Introduction to Device Management's Value</h3> <p>Device management is a cornerstone of organizational security, offering visibility and control over every device within your network. In the Microsoft security ecosystem, effective device management ensures that devices comply with security policies, are up-to-date with the latest patches, and are safeguarded against threats, forming a robust defense against potential security breaches.</p>
+    <h3>Why Device Management Matters for Your Security Journey</h3>
+    <ul>
+        <li><strong>Asset Visibility:</strong> Achieve a complete overview of all devices, enhancing the ability to detect and respond to threats.</li>
+        <li><strong>Proactive Security:</strong> Stay ahead of vulnerabilities by ensuring devices are regularly updated and monitored.</li>
+        <li><strong>Compliance and Risk Mitigation:</strong> Ensure devices adhere to compliance standards and security policies, reducing the overall risk profile.</li>
+    </ul>
+
+    <h3>Detailed Analysis</h3>
+    <h4>Device Overview:</h4>
+    <div class="chart-container">
+        <canvas id="osSummaryChart"></canvas>
+    </div>
+
+    <script>
+        var osSummaryData = {{ device_risk.os_summary.to_dict() | tojson }};
+
+        var labels = Object.keys(osSummaryData);
+        var counts = Object.values(osSummaryData);
+
+        var ctx = document.getElementById('osSummaryChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Count',
+                    data: counts,
+                    backgroundColor: '#8DEDC7'
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+    </script>
+
+<p>OS Summary:</p>
+<ul>
+    {% for os, count in device_risk.os_summary.items() %}
+        <li>{{ os }}: {{ count }}</li>
+    {% endfor %}
+</ul>
+
+    <p>Domain Sprawl:</p>
+    <div class="chart-container">
+        <canvas id="domainSprawlChart"></canvas>
+    </div>
+
+    <script>
+        var domainSprawlData = {{ device_risk.patch_summary.to_dict() | tojson }};
+
+        var labels = Object.keys(domainSprawlData);
+        var counts = Object.values(domainSprawlData);
+
+        var ctx = document.getElementById('domainSprawlChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Count',
+                    data: counts,
+                    backgroundColor: '#8DEDC7'
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+    </script>
+
+    <p>Domain Sprawl:</p>
+    <ul>
+        {% for domain, count in device_risk.patch_summary.items() %}
+            <li>{{ domain }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Risk Summary:</p>
+    <div class="chart-container">
+        <canvas id="riskSummaryBarGraph"></canvas>
+    </div>
+
+    <script>
+        var riskSummaryData = {{ device_risk.risk_summary.to_dict() | tojson }};
+        delete riskSummaryData['No known risks'];
+
+        var labels = Object.keys(riskSummaryData);
+        var counts = Object.values(riskSummaryData);
+
+        var ctx = document.getElementById('riskSummaryBarGraph').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: '#8DEDC7'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+    </script>
+    <ul>
+        {% for risk_level, count in device_risk.risk_summary.items() %}
+            <li>{{ risk_level }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h4>High-Risk Device Analysis</h4>
+    <p>Number of Active High-Risk Devices: {{ device_risk.high_risk_devices }}</p>
+
+    <h5>Sample of High-Risk Devices:</h5>
+    <table>
+        <thead>
+            <tr>
+                <th>Device Name</th>
+                <th>Risk Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in device_risk.top_high_risk_devices.itertuples(index=False) %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Actionable Insights</h3>
+    <p>Based on the analysis of your devices, we have identified the following actionable insights:</p>
+    
+    <ul>
+        <li>Prioritize the remediation of devices with high risk levels and exposure scores. These devices have active compromising behavior and severe attack surfaces that need immediate attention.</li>
+        <li>Focus on patching and updating the software and operating systems on these high-risk devices to mitigate vulnerabilities and reduce the attack surface.</li>
+        <li>Conduct a manual review of the circumstances surrounding each high-risk device to identify any specific security gaps or misconfigurations that need to be addressed.</li>
+        <li>Implement stricter access controls and monitoring for high-risk devices to detect and respond to any suspicious activities promptly.</li>
+        <li>Regularly assess the security posture of your devices and maintain a proactive patch management process to ensure timely remediation of vulnerabilities.</li>
+    </ul>
+    
+    {% if device_risk.high_exposure_devices_summary.empty %}
+        <p>No devices with high exposure levels were identified in the provided data.</p>
+    {% else %}
+        <p>The following devices have been identified as having high risk levels and exposure scores:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Device Name</th>
+                    <th>Risk Level</th>
+                    <th>Exposure Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for _, row in device_risk.high_exposure_devices_summary.iterrows() %}
+                    <tr>
+                        <td>{{ row['Device Name'] }}</td>
+                        <td>{{ row['Risk Level'] }}</td>
+                        <td>{{ row['Exposure Level'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>We recommend prioritizing the remediation efforts for these devices to minimize the risk of potential security incidents.</p>
+    {% endif %}
+
+    <p>To learn more about BlueVoyant's Microsoft 365 Entra services and how they can benefit your organization, visit our <a href="https://www.bluevoyant.com/knowledge-center/microsoft-365-defender" target="_blank">Microsoft 365 Defender Knowledge Center</a>.</p>
+
+    <p>If you have any questions or would like to discuss how BlueVoyant can assist you in enhancing your user detection capabilities, click the button below to send us an email:</p>
+
+    <a href="mailto:microsoft@bluevoyant.com?subject=Inquiry%20about%20Device%20Management%20Services&body=Hello%2C%0A%0AI%20would%20like%20to%20learn%20more%20about%20BlueVoyant%27s%20device%20management%20services.%20Please%20let%20me%20know%20how%20we%20can%20schedule%20a%20discussion.%0A%0AThank%20you%2C%0A%5BYour%20Name%5D" target="_blank"><button>Contact BlueVoyant</button></a>
+
+    <p>You can also schedule a meeting with our team at your convenience by clicking the button below:</p>
+
+    <a href="https://calendly.com/bluevoyant/device-management-services" target="_blank"><button>Schedule a Meeting</button></a>
+
+</div>
+
+<div class="section"> <h2 class="section-heading">M365 Incident Management</h2> <div class="section-content"> <h3>Introduction to the Value of M365 Incident Management</h3> <p>Incident management is a cornerstone of effective cybersecurity, providing crucial insights into security threats and enabling timely responses to safeguard organizational assets. In the interconnected Microsoft security ecosystem, incident management is not just about responding to incidents; it's about understanding the broader context, learning from each event, and continuously enhancing your security posture to preempt future threats.</p>
+    <h3>The Significance of Incident Analysis</h3>
+    <p>A detailed incident analysis offers a window into the security challenges your organization faces. It reveals patterns, identifies potential weaknesses, and helps prioritize responses based on severity and impact. By correlating incident data with user and device insights, you gain a holistic view of your security landscape, enabling you to make informed decisions and strategic improvements.</p>
+
+    <h3>Detailed Incident Insights and Recommendations</h3>
+    <p>Number of High Severity Incidents: {{ incidents.high_severity_incidents }}</p>
+
+    <div class="chart-container">
+        <canvas id="incidentSeverityChart"></canvas>
+    </div>
+
+    <script>
+        var incidentSeverityData = {{ incidents.incident_severity_counts.to_dict() | tojson }};
+    
+        var labels = Object.keys(incidentSeverityData);
+        var counts = Object.values(incidentSeverityData);
+    
+        var ctx = document.getElementById('incidentSeverityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: counts,
+                    backgroundColor: '#8DEDC7'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+    </script>
+
+    <h4>Incident Summary:</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Incident Name</th>
+                <th>Severity</th>
+                <th>Impacted Assets</th>
+                <th>Tags</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in incidents.incident_summary.itertuples(index=False) %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Correlation with User and Device Data</h3>
+    <p>Suspected connections between high-risk devices, users, and high-severity incidents indicate potentially more concerning compromising activity. The analysis identifies overlaps between user detections, device data, and incidents, pinpointing areas of heightened risk and potential targets for further investigation. Please review the following correlations and investigate further:</p>
+    
+    <h4>User-Incident Correlations:</h4>
+    {% if incidents.user_incident_correlation.empty %}
+        <p>No user-incident correlations found for high-risk users and high-severity incidents.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Incident Name</th>
+                    <th>User/UPN</th>
+                    <th>User Risk Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for _, row in incidents.user_incident_correlation.iterrows() %}
+                    <tr>
+                        <td>{{ row['Incident Name'] }}</td>
+                        <td>{{ row['User/UPN'] }}</td>
+                        <td>{{ row['User Risk Level'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    <h4>Device-Incident Correlations:</h4>
+    {% if incidents.device_incident_correlation.empty %}
+        <p>No device-incident correlations found for high-risk devices and high-severity incidents.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Incident Name</th>
+                    <th>Device Name</th>
+                    <th>Device Risk Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for _, row in incidents.device_incident_correlation.iterrows() %}
+                    <tr>
+                        <td>{{ row['Incident Name'] }}</td>
+                        <td>{{ row['Device Name'] }}</td>
+                        <td>{{ row['Device Risk Level'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <h3>Actionable Insights and Recommendations</h3>
+    <ul>
+        <li>Prioritize the investigation and remediation of high-severity incidents, focusing on those with potential user and device correlations.</li>
+        <li>Conduct a thorough review of the identified user accounts and devices to determine the scope and impact of any compromising activity.</li>
+        <li>Implement stricter access controls and monitoring for the identified user accounts and devices to prevent further unauthorized access and data exfiltration.</li>
+        <li>Regularly review and update incident response procedures to ensure timely and effective handling of security incidents.</li>
+        <li>Conduct regular user awareness training to educate employees about the importance of reporting suspicious activities and following security best practices.</li>
+        <li>Implement multi-factor authentication (MFA) for all user accounts to add an extra layer of security and mitigate the risk of compromised credentials.</li>
+        <li>Establish a continuous monitoring and threat hunting program to proactively identify and respond to potential security threats.</li>
+        <li>Engage with external security experts or managed security service providers to augment your internal security capabilities and stay up-to-date with the latest threat landscape.</li>
+    </ul>
+
+    <p>To learn more about BlueVoyant's Managed Detection and Response (MDR) services and how they can enhance your incident management capabilities, visit our <a href="https://www.bluevoyant.com/platform/mdr" target="_blank">MDR Service Page</a>.</p>
+
+    <p>If you have any questions or would like to discuss how BlueVoyant can assist you in improving your incident management, click the button below to send us an email:</p>
+
+    <a href="mailto:microsoft@bluevoyant.com?subject=Inquiry%20about%20Incident%20Management%20Services&body=Hello%2C%0A%0AI%20would%20like%20to%20learn%20more%20about%20BlueVoyant%27s%20incident%20management%20services.%20Please%20let%20me%20know%20how%20we%20can%20schedule%20a%20discussion.%0A%0AThank%20you%2C%0A%5BYour%20Name%5D" target="_blank"><button>Contact BlueVoyant</button></a>
+
+    <p>You can also schedule a meeting with our team at your convenience by clicking the button below:</p>
+
+    <a href="https://calendly.com/bluevoyant/incident-management-services" target="_blank"><button>Schedule a Meeting</button></a>
+</div>
+
+</div> <div class="section"> <h2 class="section-heading">Conclusion: BlueVoyant's Comprehensive Security Services</h2> <div class="section-content"> <p>Understanding and addressing these security incidents and device vulnerabilities is a foundational step toward enhancing your cybersecurity framework. BlueVoyant extends a suite of professional and managed services to elevate your organization's security measures:</p>
+    <ul>
+        <li><strong>M365 Hardening:</strong> Our experts will tighten your M365 configurations against potential threats while ensuring alignment with industry-best practices and compliance standards.</li>
+        <li><strong>Vulnerability Management:</strong> Stay proactive with our service that identifies, assesses, and helps mitigate vulnerabilities, keeping your defenses robust against emerging threats.</li>
+        <li><strong>Managed Detection and Response (MDR):</strong> Our MDR service offers continuous monitoring and rapid response to incidents, backed by our team of security analysts, ensuring comprehensive protection around the clock.</li>
+    </ul>
+
+    <p>With BlueVoyant, you gain more than just a service provider; you gain a partner dedicated to your cybersecurity journey, empowering your organization to navigate the complexities of the digital age securely and confidently. Let's collaborate to transform your Microsoft security capabilities into a formidable defense mechanism, safeguarding your operations and data.</p>
+
+    <p>To learn more about BlueVoyant's Managed Detection and Response (MDR) services, visit our <a href="https://www.bluevoyant.com/platform/mdr" target="_blank">MDR Service Page</a>.</p>
+
+    <p>If you have any questions or would like to discuss how BlueVoyant can assist you in improving your overall cybersecurity posture, click the button below to send us an email:</p>
+
+    <a href="mailto:microsoft@bluevoyant.com?subject=Inquiry%20about%20BlueVoyant%20Security%20Services&body=Hello%2C%0A%0AI%20would%20like%20to%20learn%20more%20about%20BlueVoyant%27s%20comprehensive%20security%20services.%20Please%20let%20me%20know%20how%20we%20can%20schedule%20a%20discussion.%0A%0AThank%20you%2C%0A%5BYour%20Name%5D" target="_blank"><button>Contact BlueVoyant</button></a>
+
+    <p>You can also schedule a meeting with our team at your convenience by clicking the button below:</p>
+
+    <a href="https://calendly.com/bluevoyant/security-services-consultation" target="_blank"><button>Schedule a Meeting</button></a>
+</div>
+</div>
+
+<script>
+    var productDeploymentData = {{ product_deployment.to_json(orient='records') | safe }};
+
+    var labels = productDeploymentData.map(function(item) {
+        return item['Product'];
+    });
+
+    var achievedPoints = productDeploymentData.map(function(item) {
+        return item['Points Achieved'];
+    });
+
+    var possiblePoints = productDeploymentData.map(function(item) {
+        return item['Points Possible'];
+    });
+
+    var ctx = document.getElementById('productDeploymentChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Points Achieved',
+                data: achievedPoints,
+                backgroundColor: '#8DEDC7',
+                borderWidth: 1
+            }, {
+                label: 'Points Possible',
+                data: possiblePoints,
+                backgroundColor: '#676BFB',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
