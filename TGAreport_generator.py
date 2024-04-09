@@ -3,6 +3,10 @@ import pandas as pd
 from jinja2 import Environment, FileSystemLoader
 import os
 
+def app():
+    # Your Streamlit code for the Threat Gap Analysis Report Generator
+    st.title("Threat Gap Analysis Report Generator")
+    
 # Analysis functions 
 def analyze_m365_secure_score(df):
     print("Column names:", df.columns)
