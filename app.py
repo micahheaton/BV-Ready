@@ -1,15 +1,21 @@
-import os
-from flask import Flask, send_file
+import streamlit as st
+import subprocess
 
-app = Flask(__name__)
+def main():
+    st.set_page_config(page_title="Report Generators", page_icon=None, layout="wide", initial_sidebar_state="auto")
+    
+    st.title("Report Generators")
+    
+    st.write("Select a report generator to run:")
+    
+    if st.button("M365 Threat Gap Analysis Report Generator"):
+        subprocess.Popen(["streamlit", "run", "TGAreport_generator.py"])
+    
+    if st.button("Report Generator"):
+        subprocess.Popen(["streamlit", "run", "report_generator.py"])
+    
+    if st.button("Sentinel Report Generator"):
+        subprocess.Popen(["streamlit", "run", "sentinel_report_generator.py"])
 
-@app.route('/')
-def index():
-    return send_file('index.html')
-
-@app.route('/<path:filename>')
-def serve_file(filename):
-    return send_file(filename)
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+if __name__ == "__main__":
+    main()
